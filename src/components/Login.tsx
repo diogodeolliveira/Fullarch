@@ -46,25 +46,29 @@ export function Login() {
       <div className="login-orbit login-orbit-two" />
       <form onSubmit={handleSubmit} className="login-card">
         <div className="login-mascot" aria-hidden="true">
-          <svg className="pixel-mascot" viewBox="0 0 160 160" role="img">
-            <g shapeRendering="crispEdges">
-              <path className="pixel-brush" d="M22 47h12v7h5v7h5v7h-5v7h-4v7h-5v-7h-5v-7h-5v-7h-3v-7h5Z" />
-              <path className="pixel-brush-handle" d="M27 76h10v49h-5v8h-7v-8h-4v-7h6Z" />
-              <path className="pixel-bristles" d="M20 43h20v8H20Z" />
-              <path className="pixel-tooth-shadow" d="M55 35h8v-5h12v-5h20v5h13v5h9v7h7v13h5v28h-5v15h-6v14h-8v15h-9v10h-13v-7H72v7H60v-10h-8v-15h-7v-14h-6V83h-5V55h5V42h8v-7h8Z" />
-              <path className="pixel-tooth" d="M52 31h10v-6h13v-5h20v5h13v6h10v8h7v14h5v27h-5v15h-6v15h-8v15h-9v9H76v-7H63v7H51v-9h-8v-15h-7v-15h-6V81h-5V54h5V40h7v-9h15Z" />
-              <path className="pixel-highlight" d="M48 42h8v-7h10v-5h10v5h-7v8h-6v15h-9v-7h-6Z" />
-              <path className="pixel-brow" d="M54 67h12v4H54ZM87 71h12v-4h5v4h-5v4H87Z" />
-              <path className="pixel-eye" d="M54 77h13v4h4v12h-4v5H54v-4h-5V81h5Z" />
-              <path className="pixel-eye" d="M91 77h13v4h4v12h-4v5H91v-4h-5V81h5Z" />
-              <path className="pixel-glint" d="M55 81h5v5h-5Z" /><path className="pixel-glint" d="M92 81h5v5h-5Z" />
-              <path className="pixel-cheek" d="M43 101h9v5h5v6H43Z" /><path className="pixel-cheek" d="M103 106h5v-5h9v11h-14Z" />
-              <path className="pixel-mouth" d="M65 104h5v5h17v-5h5v10h-5v5H70v-5h-5Z" />
-              <path className="pixel-tongue" d="M74 114h9v4h-9Z" />
-              <path className="pixel-coat" d="M43 119h21v7h8v9H58v-5H43ZM91 126h8v-7h20v18H99v-9Z" />
-              <path className="pixel-bowtie" d="M75 119h-9v8h9v5h10v-5h9v-8h-9v-4H75Z" />
-              <path className="pixel-spark" d="M132 28h5v7h6v5h-6v7h-5v-7h-6v-5h6Z" />
-            </g>
+          <svg className="smooth-mascot" viewBox="0 0 200 210" role="img">
+            <ellipse className="mascot-ground" cx="100" cy="199" rx="45" ry="6" />
+            <path className="mascot-arm mascot-arm-left" d="M68 132c-14 2-24 9-32 20" />
+            <path className="mascot-arm mascot-arm-right" d="M132 132c14 2 24 9 32 20" />
+            <circle className="mascot-hand" cx="34" cy="154" r="9" />
+            <circle className="mascot-hand" cx="166" cy="154" r="9" />
+            <path className="mascot-leg" d="M82 165v24c0 8-5 12-11 12s-10-4-10-12v-24Z" />
+            <path className="mascot-leg" d="M118 165v24c0 8 5 12 11 12s10-4 10-12v-24Z" />
+            <rect className="mascot-body" x="63" y="105" width="74" height="65" rx="17" />
+            <path className="mascot-body-shine" d="M76 119c5-5 12-7 20-7h7c-10 5-14 12-15 21-1 7-6 9-10 4-4-5-4-12-2-18Z" />
+            <path className="mascot-tooth-shadow" d="M55 58c0-27 18-44 45-44s45 17 45 44c0 20-6 28-10 42-4 13-5 25-17 25-9 0-10-16-18-16s-9 16-18 16c-12 0-13-12-17-25-4-14-10-22-10-42Z" />
+            <path className="mascot-tooth" d="M51 54c0-27 18-44 45-44s45 17 45 44c0 20-6 28-10 42-4 13-5 25-17 25-9 0-10-16-18-16s-9 16-18 16c-12 0-13-12-17-25-4-14-10-22-10-42Z" />
+            <path className="mascot-tooth-highlight" d="M65 34c7-10 17-15 29-15-14 7-20 18-21 31-1 10-8 12-12 6-4-6-3-14 4-22Z" />
+            <path className="mascot-brow" d="M70 55c5-4 11-5 17-2M112 53c6-3 12-2 17 2" />
+            <ellipse className="mascot-eye" cx="78" cy="69" rx="7" ry="9" />
+            <ellipse className="mascot-eye" cx="122" cy="69" rx="7" ry="9" />
+            <circle className="mascot-eye-glint" cx="80" cy="66" r="2.5" /><circle className="mascot-eye-glint" cx="124" cy="66" r="2.5" />
+            <circle className="mascot-cheek" cx="65" cy="88" r="6" /><circle className="mascot-cheek" cx="135" cy="88" r="6" />
+            <path className="mascot-mouth" d="M84 85c5 9 11 11 16 11s11-2 16-11" />
+            <path className="mascot-tongue" d="M94 94c4 3 8 3 12 0" />
+            <path className="mascot-collar" d="m80 109 20 18 20-18-8-7H88Z" />
+            <path className="mascot-bowtie" d="m100 119-18-9-5 13 17 8Zm0 0 18-9 5 13-17 8Z" />
+            <circle className="mascot-bowtie-center" cx="100" cy="125" r="5" />
           </svg>
         </div>
         <div className="login-brand">Full<span>arch</span></div>

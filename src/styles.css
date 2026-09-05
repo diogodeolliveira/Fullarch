@@ -46,23 +46,28 @@
     border-radius:22px; box-shadow:0 24px 70px rgba(47,75,60,.16), 0 3px 8px rgba(28,27,26,.06);
     animation:login-rise .55s cubic-bezier(.22,1,.36,1) both;
   }
-  .login-mascot{ width:164px; height:148px; margin:-4px auto 0; animation:mascot-float 4s ease-in-out .6s infinite; image-rendering:pixelated; }
+  .login-mascot{ width:164px; height:166px; margin:-12px auto -4px; animation:mascot-float 4s ease-in-out .6s infinite; }
   .login-mascot svg{ width:100%; height:100%; overflow:visible; }
-  .pixel-tooth-shadow{ fill:#D49A48; }
-  .pixel-tooth{ fill:#FFFDF7; stroke:#263B5A; stroke-width:2; }
-  .pixel-highlight{ fill:#fff; }
-  .pixel-eye{ fill:#69402C; stroke:#263B5A; stroke-width:1; }
-  .pixel-glint{ fill:#fff; }
-  .pixel-brow{ fill:#263B5A; }
-  .pixel-cheek{ fill:#F29A9A; }
-  .pixel-mouth{ fill:#30212A; }
-  .pixel-tongue{ fill:#E96978; }
-  .pixel-coat{ fill:#E8E5DF; stroke:#A9A49C; stroke-width:1; }
-  .pixel-bowtie{ fill:#263B5A; }
-  .pixel-brush{ fill:#159EB6; stroke:#11677F; stroke-width:1; }
-  .pixel-brush-handle{ fill:#20B6C7; stroke:#11677F; stroke-width:1; }
-  .pixel-bristles{ fill:#E6388F; stroke:#A51E6A; stroke-width:1; }
-  .pixel-spark{ fill:#D8A84F; }
+  .mascot-ground{ fill:#D8A05A; opacity:.22; }
+  .mascot-arm{ fill:none; stroke:#31455C; stroke-width:12; stroke-linecap:round; }
+  .mascot-arm-left{ stroke:#FFFDF7; }
+  .mascot-arm-right{ stroke:#FFFDF7; }
+  .mascot-hand{ fill:#FFFDF7; stroke:#31455C; stroke-width:3; }
+  .mascot-leg{ fill:#FFFDF7; stroke:#31455C; stroke-width:3; }
+  .mascot-body{ fill:#F4F0E9; stroke:#31455C; stroke-width:3; }
+  .mascot-body-shine{ fill:#fff; opacity:.7; }
+  .mascot-tooth-shadow{ fill:#D8A05A; opacity:.4; }
+  .mascot-tooth{ fill:#FFFDF7; stroke:#31455C; stroke-width:3; stroke-linejoin:round; }
+  .mascot-tooth-highlight{ fill:#fff; opacity:.85; }
+  .mascot-brow{ fill:none; stroke:#31455C; stroke-width:4; stroke-linecap:round; }
+  .mascot-eye{ fill:#7C482D; stroke:#31455C; stroke-width:2; }
+  .mascot-eye-glint{ fill:#fff; }
+  .mascot-cheek{ fill:#F29A9A; opacity:.7; }
+  .mascot-mouth{ fill:none; stroke:#30212A; stroke-width:4; stroke-linecap:round; }
+  .mascot-tongue{ fill:none; stroke:#E96978; stroke-width:3; stroke-linecap:round; }
+  .mascot-collar{ fill:#fff; stroke:#A9A49C; stroke-width:2; }
+  .mascot-bowtie{ fill:#263B5A; stroke:#1D2C42; stroke-width:2; }
+  .mascot-bowtie-center{ fill:#D5A85C; }
   .login-brand{ color:var(--accent); font-family:var(--font-serif); font-size:38px; line-height:1; font-weight:700; letter-spacing:-.02em; text-align:center; }
   .login-brand span{ color:var(--amber); }
   .login-kicker{ color:var(--ink-soft); font-size:11px; letter-spacing:.08em; text-align:center; text-transform:uppercase; margin:8px 0 26px; }
@@ -640,7 +645,7 @@
     .app.full{ grid-template-columns: var(--sidebar-width) 1fr; }
     .login-page{ padding:16px; }
     .login-card{ padding:22px 20px 24px; border-radius:18px; }
-    .login-mascot{ width:142px; height:128px; }
+    .login-mascot{ width:142px; height:144px; }
     .login-brand{ font-size:34px; }
     .login-kicker{ margin-bottom:22px; font-size:10px; }
     /* Sidebar minimal em mobile */
