@@ -19,7 +19,9 @@ export function Sidebar({
 }) {
   return (
     <nav className="sidebar" aria-label="Navegação principal">
-      <div className="brand">D</div>
+      <div className="brand">
+        <img src="/mascote-dentinho.png" alt="Mascote Fullarch" />
+      </div>
       {ITEMS.map((item) => (
         <button
           key={item.view}
