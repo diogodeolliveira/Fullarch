@@ -46,21 +46,36 @@ export function Login() {
       <div className="login-orbit login-orbit-two" />
       <form onSubmit={handleSubmit} className="login-card">
         <div className="login-mascot" aria-hidden="true">
-          <svg viewBox="0 0 180 180" role="img">
-            <path
-              className="tooth-shadow"
-              d="M47 62c2-27 21-43 43-43s41 16 43 43c2 25-8 35-13 53-4 15-6 37-20 37-10 0-11-15-20-15s-10 15-20 15c-14 0-16-22-20-37-5-18-15-28-13-53Z"
-            />
-            <path
-              className="tooth-body"
-              d="M47 59c2-27 21-40 43-40s41 13 43 40c2 24-8 34-13 52-4 15-6 37-20 37-10 0-11-15-20-15s-10 15-20 15c-14 0-16-22-20-37-5-18-15-28-13-52Z"
-            />
-            <path className="tooth-highlight" d="M61 39c7-9 16-13 27-14-13 8-19 18-21 32-2 13-8 15-12 8-4-7-2-17 6-26Z" />
-            <path className="tooth-mouth" d="M73 101c9 9 25 9 34 0" />
-            <circle className="tooth-eye" cx="72" cy="82" r="5" />
-            <circle className="tooth-eye" cx="108" cy="82" r="5" />
-            <path className="tooth-spark" d="m139 49 4 9 9 4-9 4-4 9-4-9-9-4 9-4 4-9Z" />
-            <path className="tooth-arc" d="M55 126c23 15 47 15 70 0" />
+          <svg viewBox="0 0 240 230" role="img">
+            <ellipse className="tooth-ground" cx="121" cy="214" rx="67" ry="8" />
+            <g className="mascot-brush">
+              <path className="brush-handle" d="M39 70 72 202c2 8-10 11-12 3L27 76Z" />
+              <path className="brush-neck" d="m27 76-8-35 18-5 8 35Z" />
+              <rect className="brush-head" x="15" y="8" width="27" height="40" rx="10" transform="rotate(-14 15 8)" />
+              <path className="brush-bristles" d="M18 13h21M16 19h23M17 25h23M18 31h23M20 37h22" />
+              <path className="brush-label" d="M48 129l9 35" />
+            </g>
+            <path className="tooth-shadow" d="M79 66c0-36 22-55 51-55s52 19 52 55c0 28-8 40-13 57-5 17-6 47-22 47-12 0-13-22-22-22s-10 22-23 22c-16 0-17-30-22-47-5-17-13-29-13-57Z" />
+            <path className="tooth-body" d="M76 62c0-36 22-55 51-55s52 19 52 55c0 28-8 40-13 57-5 17-6 47-22 47-12 0-13-22-22-22s-10 22-23 22c-16 0-17-30-22-47-5-17-13-29-13-57Z" />
+            <path className="tooth-highlight" d="M91 34c10-14 24-20 39-21-19 9-28 24-30 44-2 14-10 17-15 8-5-9-3-20 6-31Z" />
+            <path className="coat-left" d="m78 112 31 10-6 54-29-5c-6-1-9-7-7-13Z" />
+            <path className="coat-right" d="m176 112-31 10 6 54 29-5c6-1 9-7 7-13Z" />
+            <path className="coat-collar" d="m104 111 21 18-16 11-16-24ZM150 111l-21 18 16 11 16-24Z" />
+            <path className="bowtie" d="m126 121-17-9-5 14 19 8Zm3 0 17-9 5 14-19 8Z" />
+            <circle className="bowtie-center" cx="128" cy="128" r="5" />
+            <path className="coat-button" d="M101 148h4M103 157h4M154 148h4M156 157h4" />
+            <path className="brow" d="M101 66c6-5 12-6 18-3M139 63c7-3 13-2 18 3" />
+            <ellipse className="tooth-eye" cx="109" cy="82" rx="8" ry="10" />
+            <ellipse className="tooth-eye" cx="148" cy="82" rx="8" ry="10" />
+            <circle className="eye-glint" cx="111" cy="79" r="3" />
+            <circle className="eye-glint" cx="150" cy="79" r="3" />
+            <circle className="cheek" cx="96" cy="100" r="7" />
+            <circle className="cheek" cx="161" cy="100" r="7" />
+            <path className="tooth-mouth" d="M116 99c8 12 22 12 30 0" />
+            <path className="mouth-tongue" d="M126 108c4 3 8 3 12 0" />
+            <path className="wave-arm" d="m177 117 25-28" />
+            <path className="wave-hand" d="m198 91c-5-9 3-13 7-5l2-13c1-8 9-7 8 1l-1 14 6-11c4-7 10-2 6 5l-7 15c-3 7-10 12-18 10Z" />
+            <path className="tooth-spark" d="m211 36 4 9 9 4-9 4-4 9-4-9-9-4 9-4 4-9Z" />
           </svg>
         </div>
         <div className="login-brand">Full<span>arch</span></div>
