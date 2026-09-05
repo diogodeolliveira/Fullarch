@@ -11,7 +11,7 @@ import { DashboardTab } from './components/DashboardTab'
 export default function App() {
   const { session, loading, signOut } = useAuth()
   const { patients, loading: patientsLoading, error: patientsError, reload } = usePatients(Boolean(session))
-  const [view, setView] = useState<ViewName>('dashboard')
+  const [view, setView] = useState<ViewName>('pacientes')
   const [activeId, setActiveId] = useState<string | null>(null)
 
   if (loading) return <div style={{ padding: 40 }}>Carregando…</div>
