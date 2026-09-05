@@ -31,6 +31,42 @@
   button{font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; touch-action:manipulation;}
   :focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
 
+  /* ---------- LOGIN ---------- */
+  .login-page{
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden; padding:24px;
+    background: #E8EFEA;
+    background-image: linear-gradient(135deg, rgba(255,255,255,.7), transparent 52%),
+      radial-gradient(circle at 15% 20%, rgba(192,138,62,.15), transparent 27%),
+      radial-gradient(circle at 90% 85%, rgba(47,75,60,.16), transparent 31%);
+  }
+  .login-card{
+    width:min(100%, 380px); position:relative; z-index:1; padding:30px 34px 32px;
+    background:rgba(255,255,255,.88); border:1px solid rgba(255,255,255,.75);
+    border-radius:22px; box-shadow:0 24px 70px rgba(47,75,60,.16), 0 3px 8px rgba(28,27,26,.06);
+    animation:login-rise .55s cubic-bezier(.22,1,.36,1) both;
+  }
+  .login-mascot{ width:124px; height:124px; margin:0 auto 4px; animation:mascot-float 4s ease-in-out .6s infinite; }
+  .login-mascot svg{ width:100%; height:100%; overflow:visible; }
+  .tooth-shadow{ fill:#D8A05A; opacity:.32; transform:translateY(4px); }
+  .tooth-body{ fill:#FFFDF7; stroke:#2F4B3C; stroke-width:4; stroke-linejoin:round; }
+  .tooth-highlight{ fill:#fff; opacity:.8; }
+  .tooth-eye{ fill:#2F4B3C; }
+  .tooth-mouth{ fill:none; stroke:#2F4B3C; stroke-width:4; stroke-linecap:round; }
+  .tooth-spark{ fill:#C08A3E; }
+  .tooth-arc{ fill:none; stroke:#C08A3E; stroke-width:3; stroke-linecap:round; stroke-dasharray:3 6; }
+  .login-brand{ color:var(--accent); font-family:var(--font-serif); font-size:38px; line-height:1; font-weight:700; letter-spacing:-.02em; text-align:center; }
+  .login-brand span{ color:var(--amber); }
+  .login-kicker{ color:var(--ink-soft); font-size:11px; letter-spacing:.08em; text-align:center; text-transform:uppercase; margin:8px 0 26px; }
+  .login-card .modal-title{ text-align:left; }
+  .login-card .modal-actions{ margin-top:18px; }
+  .login-card .btn-solid{ width:100%; justify-content:center; min-height:42px; }
+  .login-orbit{ position:absolute; border:1px solid rgba(47,75,60,.13); border-radius:50%; transform:rotate(-18deg); }
+  .login-orbit-one{ width:480px; height:190px; top:-50px; left:-100px; }
+  .login-orbit-two{ width:560px; height:220px; right:-160px; bottom:-50px; border-color:rgba(192,138,62,.2); }
+  @keyframes login-rise{ from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:translateY(0)} }
+  @keyframes mascot-float{ 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-5px) rotate(1deg)} }
+
   .app{
     display:grid;
     grid-template-columns: var(--sidebar-width) var(--list-width) 1fr;
@@ -590,6 +626,11 @@
     .app{ grid-template-columns: var(--sidebar-width) 0px 1fr; }
     .list-col{ display:none; }
     .app.full{ grid-template-columns: var(--sidebar-width) 1fr; }
+    .login-page{ padding:16px; }
+    .login-card{ padding:22px 20px 24px; border-radius:18px; }
+    .login-mascot{ width:104px; height:104px; }
+    .login-brand{ font-size:34px; }
+    .login-kicker{ margin-bottom:22px; font-size:10px; }
     /* Sidebar minimal em mobile */
     .nav-item{ width:40px; height:40px; font-size:6px; }
     .nav-item svg{ width:14px; height:14px; }
