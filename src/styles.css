@@ -48,6 +48,7 @@
   }
   .login-mascot{ width:164px; height:166px; margin:-12px auto -4px; animation:mascot-float 4s ease-in-out .6s infinite; }
   .login-mascot svg{ width:100%; height:100%; overflow:visible; }
+  .mascot-image{ display:block; width:100%; height:100%; object-fit:contain; }
   .mascot-ground{ fill:#D8A05A; opacity:.22; }
   .mascot-arm{ fill:none; stroke:#31455C; stroke-width:12; stroke-linecap:round; }
   .mascot-arm-left{ stroke:#FFFDF7; }
