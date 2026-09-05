@@ -3,8 +3,8 @@ export type ViewName = 'pacientes' | 'dashboard' | 'agenda' | 'crm' | 'financeir
 type IconName = 'patients' | 'home' | 'calendar' | 'crm' | 'finance' | 'settings' | 'logout'
 
 const ITEMS: { view: ViewName; label: string; icon: IconName }[] = [
-  { view: 'pacientes', label: 'Pacientes', icon: 'patients' },
   { view: 'dashboard', label: 'Início', icon: 'home' },
+  { view: 'pacientes', label: 'Pacientes', icon: 'patients' },
   { view: 'agenda', label: 'Agenda', icon: 'calendar' },
   { view: 'crm', label: 'CRM', icon: 'crm' },
   { view: 'financeiro', label: 'Financeiro', icon: 'finance' },
