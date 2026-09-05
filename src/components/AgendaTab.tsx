@@ -114,7 +114,7 @@ export function AgendaTab({
               {calendarDays.map((day) => {
                 const appts = bySlot.get(`${dateKey(day)}-${h}`) ?? []
                 return <div className="agenda-slot" key={`${dateKey(day)}-${h}`} onClick={() => appts.length === 0 && (setDate(day), setSlotHour(h))}>
-                  {appts.map((a) => <button key={a.id} className="slot-appointment" onClick={(event) => { event.stopPropagation(); setViewing(a) }}><span className="slot-name">{a.patient_name}</span><span className="slot-reason">{a.reason}</span></button>)}
+                  {appts.map((a) => <button key={a.id} className="slot-appointment" onClick={(event) => { event.stopPropagation(); setViewing(a) }}><span className="slot-name">{a.patient_name}</span></button>)}
                   {appts.length === 0 && <span className="slot-add">+</span>}
                 </div>
               })}
