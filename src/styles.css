@@ -46,31 +46,23 @@
     border-radius:22px; box-shadow:0 24px 70px rgba(47,75,60,.16), 0 3px 8px rgba(28,27,26,.06);
     animation:login-rise .55s cubic-bezier(.22,1,.36,1) both;
   }
-  .login-mascot{ width:164px; height:148px; margin:-4px auto 0; animation:mascot-float 4s ease-in-out .6s infinite; }
+  .login-mascot{ width:164px; height:148px; margin:-4px auto 0; animation:mascot-float 4s ease-in-out .6s infinite; image-rendering:pixelated; }
   .login-mascot svg{ width:100%; height:100%; overflow:visible; }
-  .tooth-ground{ fill:#D8A05A; opacity:.24; }
-  .tooth-shadow{ fill:#E1A964; opacity:.42; transform:translateY(4px); }
-  .tooth-body{ fill:#FFFDF7; stroke:#31455C; stroke-width:3.5; stroke-linejoin:round; }
-  .tooth-highlight{ fill:#fff; opacity:.85; }
-  .tooth-eye{ fill:#8B4F2C; stroke:#31455C; stroke-width:2.5; }
-  .eye-glint{ fill:#fff; }
-  .brow{ fill:none; stroke:#31455C; stroke-width:4; stroke-linecap:round; }
-  .cheek{ fill:#F5A69C; opacity:.65; }
-  .tooth-mouth{ fill:#38252A; stroke:#31455C; stroke-width:2.5; stroke-linecap:round; }
-  .mouth-tongue{ fill:none; stroke:#E66E78; stroke-width:3; stroke-linecap:round; }
-  .coat-left,.coat-right{ fill:#F4F0E9; stroke:#A9A49C; stroke-width:2; }
-  .coat-collar{ fill:#fff; stroke:#A9A49C; stroke-width:1.5; }
-  .coat-button{ fill:none; stroke:#A9A49C; stroke-width:2; stroke-linecap:round; }
-  .bowtie{ fill:#263B5A; stroke:#1D2C42; stroke-width:1.5; }
-  .bowtie-center{ fill:#D5A85C; }
-  .wave-arm{ fill:none; stroke:#F4F0E9; stroke-width:13; stroke-linecap:round; }
-  .wave-hand{ fill:#FFFDF7; stroke:#A9A49C; stroke-width:2; stroke-linejoin:round; }
-  .brush-handle{ fill:#19AFC3; stroke:#147B94; stroke-width:2; }
-  .brush-neck{ fill:#20B8C8; stroke:#147B94; stroke-width:2; }
-  .brush-head{ fill:#D82E8B; stroke:#A51E6A; stroke-width:2; }
-  .brush-bristles{ fill:none; stroke:#F064B0; stroke-width:3; stroke-linecap:round; }
-  .brush-label{ fill:none; stroke:#D8C16B; stroke-width:2; stroke-linecap:round; }
-  .tooth-spark{ fill:#C08A3E; }
+  .pixel-tooth-shadow{ fill:#D49A48; }
+  .pixel-tooth{ fill:#FFFDF7; stroke:#263B5A; stroke-width:2; }
+  .pixel-highlight{ fill:#fff; }
+  .pixel-eye{ fill:#69402C; stroke:#263B5A; stroke-width:1; }
+  .pixel-glint{ fill:#fff; }
+  .pixel-brow{ fill:#263B5A; }
+  .pixel-cheek{ fill:#F29A9A; }
+  .pixel-mouth{ fill:#30212A; }
+  .pixel-tongue{ fill:#E96978; }
+  .pixel-coat{ fill:#E8E5DF; stroke:#A9A49C; stroke-width:1; }
+  .pixel-bowtie{ fill:#263B5A; }
+  .pixel-brush{ fill:#159EB6; stroke:#11677F; stroke-width:1; }
+  .pixel-brush-handle{ fill:#20B6C7; stroke:#11677F; stroke-width:1; }
+  .pixel-bristles{ fill:#E6388F; stroke:#A51E6A; stroke-width:1; }
+  .pixel-spark{ fill:#D8A84F; }
   .login-brand{ color:var(--accent); font-family:var(--font-serif); font-size:38px; line-height:1; font-weight:700; letter-spacing:-.02em; text-align:center; }
   .login-brand span{ color:var(--amber); }
   .login-kicker{ color:var(--ink-soft); font-size:11px; letter-spacing:.08em; text-align:center; text-transform:uppercase; margin:8px 0 26px; }
