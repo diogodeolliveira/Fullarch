@@ -17,6 +17,17 @@ function dateLabel(d: Date) {
   return label.charAt(0).toUpperCase() + label.slice(1).replace('.', '')
 }
 
+function startOfWeek(d: Date) {
+  const x = startOfDay(d)
+  const day = x.getDay()
+  x.setDate(x.getDate() - (day === 0 ? 6 : day - 1))
+  return x
+}
+
+function dateKey(d: Date) {
+  return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`
+}
+
 export function AgendaTab({
   patients,
   onOpenPatient,
@@ -25,18 +36,29 @@ export function AgendaTab({
   onOpenPatient: (patientId: string) => void
 }) {
   const [date, setDate] = useState(() => startOfDay(new Date()))
-  const { appointments, loading, error, reload } = useAgenda(date)
+  const [mode, setMode] = useState<'week' | 'day'>('week')
+  const calendarStart = mode === 'week' ? startOfWeek(date) : date
+  const calendarDays = useMemo(
+    () => Array.from({ length: mode === 'week' ? 7 : 1 }, (_, index) => {
+      const day = new Date(calendarStart)
+      day.setDate(day.getDate() + index)
+      return day
+    }),
+    [calendarStart.getTime(), mode]
+  )
+  const { appointments, loading, error, reload } = useAgenda(calendarStart, calendarDays.length)
   const [slotHour, setSlotHour] = useState<number | null>(null)
   const [viewing, setViewing] = useState<AppointmentWithPatient | null>(null)
 
-  const byHour = useMemo(() => {
-    const map = new Map<number, AppointmentWithPatient[]>()
+  const bySlot = useMemo(() => {
+    const map = new Map<string, AppointmentWithPatient[]>()
     for (const appt of appointments) {
       if (appt.status === 'cancelada') continue
-      const h = new Date(appt.scheduled_at).getHours()
-      const list = map.get(h) ?? []
+      const scheduled = new Date(appt.scheduled_at)
+      const key = `${dateKey(scheduled)}-${scheduled.getHours()}`
+      const list = map.get(key) ?? []
       list.push(appt)
-      map.set(h, list)
+      map.set(key, list)
     }
     return map
   }, [appointments])
@@ -44,7 +66,7 @@ export function AgendaTab({
   function shiftDay(delta: number) {
     setDate((prev) => {
       const next = new Date(prev)
-      next.setDate(next.getDate() + delta)
+      next.setDate(next.getDate() + delta * (mode === 'week' ? 7 : 1))
       return next
     })
   }
@@ -54,11 +76,7 @@ export function AgendaTab({
       <div className="module-header">
         <div className="module-title">Agenda</div>
         <div className="module-sub">
-          {error
-            ? error
-            : appointments.length === 0
-              ? 'Nenhuma consulta neste dia.'
-              : `${appointments.length} consulta${appointments.length > 1 ? 's' : ''} neste dia.`}
+          {error ? error : `${appointments.length} consulta${appointments.length === 1 ? '' : 's'} no período.`}
         </div>
       </div>
 
@@ -67,7 +85,7 @@ export function AgendaTab({
           <button onClick={() => shiftDay(-1)} aria-label="Dia anterior">
             ‹
           </button>
-          <span className="agenda-date-label">{dateLabel(date)}</span>
+          <span className="agenda-date-label">{mode === 'week' ? `${dateLabel(calendarDays[0])} - ${dateLabel(calendarDays[6])}` : dateLabel(date)}</span>
           <button onClick={() => shiftDay(1)} aria-label="Próximo dia">
             ›
           </button>
@@ -75,34 +93,34 @@ export function AgendaTab({
         <button className="btn btn-ghost" onClick={() => setDate(startOfDay(new Date()))}>
           Hoje
         </button>
+        <div className="agenda-view-switch" role="tablist" aria-label="Visualização da agenda">
+          <button className={mode === 'week' ? 'active' : ''} onClick={() => setMode('week')}>Semana</button>
+          <button className={mode === 'day' ? 'active' : ''} onClick={() => setMode('day')}>Dia</button>
+        </div>
         <button className="btn btn-solid" onClick={() => setSlotHour(9)}>
           Nova consulta
         </button>
       </div>
 
-      <div className="agenda-grid">
-        {HOURS.map((h) => {
-          const appts = byHour.get(h) ?? []
-          return (
+      <div className="agenda-calendar-wrap">
+        <div className={`agenda-calendar ${mode === 'day' ? 'day-view' : ''}`}>
+          <div className="agenda-calendar-head">
+            <div className="agenda-time-head" />
+            {calendarDays.map((day) => <div className="agenda-day-head" key={dateKey(day)}><strong>{day.toLocaleDateString('pt-BR', { weekday: 'short' }).replace('.', '')}</strong><span className={dateKey(day) === dateKey(new Date()) ? 'today' : ''}>{day.getDate()}</span></div>)}
+          </div>
+          {HOURS.map((h) => (
             <Fragment key={h}>
               <div className="agenda-hour">{String(h).padStart(2, '0')}:00</div>
-              <div className="agenda-slot">
-                {appts.length === 0 ? (
-                  <span className="slot-add" onClick={() => setSlotHour(h)}>
-                    ＋
-                  </span>
-                ) : (
-                  appts.map((a) => (
-                    <button key={a.id} className="slot-appointment" onClick={() => setViewing(a)}>
-                      <span className="slot-name">{a.patient_name}</span>
-                      <span className="slot-reason">{a.reason}</span>
-                    </button>
-                  ))
-                )}
-              </div>
+              {calendarDays.map((day) => {
+                const appts = bySlot.get(`${dateKey(day)}-${h}`) ?? []
+                return <div className="agenda-slot" key={`${dateKey(day)}-${h}`} onClick={() => appts.length === 0 && (setDate(day), setSlotHour(h))}>
+                  {appts.map((a) => <button key={a.id} className="slot-appointment" onClick={(event) => { event.stopPropagation(); setViewing(a) }}><span className="slot-name">{a.patient_name}</span><span className="slot-reason">{a.reason}</span></button>)}
+                  {appts.length === 0 && <span className="slot-add">+</span>}
+                </div>
+              })}
             </Fragment>
-          )
-        })}
+          ))}
+        </div>
       </div>
 
       {loading && appointments.length === 0 && !error && (
