@@ -106,9 +106,9 @@
     min-width: var(--sidebar-width);
   }
   .brand{
-    width:48px; height:48px;
-    border-radius:10px;
-    background: rgba(255,255,255,0.12);
+    width:58px; height:58px;
+    border-radius:0;
+    background:transparent;
     display:flex; align-items:center; justify-content:center;
     font-family: var(--font-serif);
     font-weight:600;
@@ -116,7 +116,7 @@
     margin: 0 auto 22px;
     flex-shrink:0;
   }
-  .brand img{ width:42px; height:42px; object-fit:contain; display:block; }
+  .brand img{ width:54px; height:54px; object-fit:contain; display:block; }
   .nav-item{
     width:100%; min-height:46px;
     display:flex; flex-direction:row; align-items:center; justify-content:flex-start;
