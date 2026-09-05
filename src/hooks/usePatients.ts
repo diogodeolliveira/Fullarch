@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { listPatients } from '../api/patients'
 import type { Patient } from '../types/database.types'
 
-export function usePatients() {
+export function usePatients(enabled = true) {
   const [patients, setPatients] = useState<Patient[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -20,8 +20,14 @@ export function usePatients() {
   }, [])
 
   useEffect(() => {
+    if (!enabled) {
+      setPatients([])
+      setError(null)
+      setLoading(false)
+      return
+    }
     reload()
-  }, [reload])
+  }, [enabled, reload])
 
   return { patients, loading, error, reload }
 }
