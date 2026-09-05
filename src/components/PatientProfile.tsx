@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { usePatientDetail } from '../hooks/usePatientDetail'
 import { addTimelineEvent } from '../api/timeline'
+import { deletePatient } from '../api/patients'
 import { financialLabel } from '../utils/patientStatus'
 import { FilesTab } from './FilesTab'
 import { OdontogramaTab } from './OdontogramaTab'
@@ -17,11 +18,10 @@ const TABS: { key: Tab; label: string }[] = [
   { key: 'documentos', label: 'Documentos' },
 ]
 
-export function PatientProfile({ patientId }: { patientId: string }) {
+export function PatientProfile({ patientId, onDeleted }: { patientId: string; onDeleted: () => void }) {
   const { patient, treatments, timeline, status, loading, error, reload } = usePatientDetail(patientId)
   const [tab, setTab] = useState<Tab>('timeline')
-  const [noteOpen, setNoteOpen] = useState(false)
-  const [scheduleOpen, setScheduleOpen] = useState(false)
+  const [deleting, setDeleting] = useState(false)
 
   if (loading && !patient) return <div className="panel-body">Carregando prontuário…</div>
   if (error) return <div className="panel-body">{error}</div>
@@ -42,11 +42,25 @@ export function PatientProfile({ patientId }: { patientId: string }) {
             </div>
           </div>
           <div className="ph-actions">
-            <button className="btn btn-ghost" onClick={() => setNoteOpen(true)}>
-              Anotar
-            </button>
-            <button className="btn btn-solid" onClick={() => setScheduleOpen(true)}>
-              Agendar
+            <button
+              className="patient-delete-btn"
+              title="Excluir paciente"
+              aria-label="Excluir paciente"
+              disabled={deleting}
+              onClick={async () => {
+                if (!window.confirm(`Excluir ${patient.name}? Esta ação não pode ser desfeita.`)) return
+                setDeleting(true)
+                try {
+                  await deletePatient(patient.id)
+                  onDeleted()
+                } finally {
+                  setDeleting(false)
+                }
+              }}
+            >
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3" />
+              </svg>
             </button>
           </div>
         </div>
@@ -97,38 +111,6 @@ export function PatientProfile({ patientId }: { patientId: string }) {
         )}
       </div>
 
-      {noteOpen && (
-        <NoteModal
-          onClose={() => setNoteOpen(false)}
-          onSave={async (text) => {
-            await addTimelineEvent({ patientId: patient.id, title: 'Anotação clínica', description: text, kind: 'Anotação' })
-            setNoteOpen(false)
-            setTab('timeline')
-            reload()
-          }}
-        />
-      )}
-      {scheduleOpen && (
-        <ScheduleModal
-          onClose={() => setScheduleOpen(false)}
-          onSave={async (date, time, reason) => {
-            const scheduledAt = new Date(`${date}T${time}:00`).toISOString()
-            const { error: apptError } = await supabase
-              .from('appointments')
-              .insert({ patient_id: patient.id, scheduled_at: scheduledAt, reason })
-            if (apptError) throw apptError
-            await addTimelineEvent({
-              patientId: patient.id,
-              title: 'Consulta agendada',
-              description: `${reason} marcada para ${new Date(scheduledAt).toLocaleString('pt-BR')}.`,
-              kind: 'Consulta',
-            })
-            setScheduleOpen(false)
-            setTab('timeline')
-            reload()
-          }}
-        />
-      )}
     </div>
   )
 }

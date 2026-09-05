@@ -226,6 +226,9 @@
   .ph-sub{ font-size:12.5px; color: var(--ink-soft); margin-top:4px; display:flex; gap:12px; flex-wrap:wrap; }
   .ph-sub span{ display:inline-flex; align-items:center; gap:4px; }
   .ph-actions{ display:flex; gap:6px; flex-wrap:wrap; }
+  .patient-delete-btn{ width:38px; height:38px; display:inline-flex; align-items:center; justify-content:center; color:#9C4A3C; border:1px solid #E7CFC9; border-radius:8px; background:transparent; }
+  .patient-delete-btn:hover{ background:#F5E2DE; }
+  .patient-delete-btn:disabled{ opacity:.5; cursor:wait; }
   .btn{
     font-size:12px; font-weight:500; padding:7px 14px; border-radius:8px;
     display:inline-flex; align-items:center; gap:5px;

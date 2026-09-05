@@ -13,6 +13,11 @@ export async function getPatient(id: string) {
   return data as Patient
 }
 
+export async function deletePatient(id: string) {
+  const { error } = await supabase.from('patients').delete().eq('id', id)
+  if (error) throw error
+}
+
 export interface NewPatientInput {
   name: string
   age?: number | null

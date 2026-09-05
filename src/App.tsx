@@ -35,7 +35,13 @@ export default function App() {
             }}
           />
           {activeId ? (
-            <PatientProfile patientId={activeId} />
+            <PatientProfile
+              patientId={activeId}
+              onDeleted={() => {
+                setActiveId(null)
+                reload()
+              }}
+            />
           ) : (
             <div className="main">
               <div className="panel-body">
