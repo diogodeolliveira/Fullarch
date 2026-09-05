@@ -102,36 +102,31 @@ export interface PatientFile {
   created_at: string
 }
 
+type Table<Row> = {
+  Row: Row & Record<string, unknown>
+  Insert: Partial<Row> & Record<string, unknown>
+  Update: Partial<Row> & Record<string, unknown>
+  Relationships: []
+}
+
 // Formato mínimo compatível com o client tipado do supabase-js.
 // (Se depois você gerar os tipos oficiais, este arquivo é substituído
 // e o client em src/lib/supabase.ts continua funcionando sem mudanças.)
 export interface Database {
   public: {
     Tables: {
-      patients: { Row: Patient; Insert: Partial<Patient>; Update: Partial<Patient> }
-      treatments: { Row: Treatment; Insert: Partial<Treatment>; Update: Partial<Treatment> }
-      treatment_sessions: {
-        Row: TreatmentSession
-        Insert: Partial<TreatmentSession>
-        Update: Partial<TreatmentSession>
-      }
-      timeline_events: {
-        Row: TimelineEvent
-        Insert: Partial<TimelineEvent>
-        Update: Partial<TimelineEvent>
-      }
-      tooth_conditions: {
-        Row: ToothCondition
-        Insert: Partial<ToothCondition>
-        Update: Partial<ToothCondition>
-      }
-      questionnaire_responses: {
-        Row: QuestionnaireResponse
-        Insert: Partial<QuestionnaireResponse>
-        Update: Partial<QuestionnaireResponse>
-      }
-      appointments: { Row: Appointment; Insert: Partial<Appointment>; Update: Partial<Appointment> }
-      files: { Row: PatientFile; Insert: Partial<PatientFile>; Update: Partial<PatientFile> }
+      patients: Table<Patient>
+      treatments: Table<Treatment>
+      treatment_sessions: Table<TreatmentSession>
+      timeline_events: Table<TimelineEvent>
+      tooth_conditions: Table<ToothCondition>
+      questionnaire_responses: Table<QuestionnaireResponse>
+      appointments: Table<Appointment>
+      files: Table<PatientFile>
     }
+    Views: Record<string, never>
+    Functions: Record<string, never>
+    Enums: Record<string, never>
+    CompositeTypes: Record<string, never>
   }
 }

@@ -89,8 +89,12 @@ export function PatientProfile({ patientId }: { patientId: string }) {
           />
         )}
         {tab === 'odontograma' && <OdontogramaTab patientId={patient.id} onChanged={reload} />}
-        {tab === 'imagens' && <FilesTab patientId={patient.id} kind="image" onChanged={reload} />}
-        {tab === 'documentos' && <FilesTab patientId={patient.id} kind="document" onChanged={reload} />}
+        {tab === 'imagens' && (
+          <FilesTab patientId={patient.id} patientName={patient.name} kind="image" onChanged={reload} />
+        )}
+        {tab === 'documentos' && (
+          <FilesTab patientId={patient.id} patientName={patient.name} kind="document" onChanged={reload} />
+        )}
       </div>
 
       {noteOpen && (

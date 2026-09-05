@@ -21,6 +21,7 @@ export async function listPatientFiles(patientId: string, kind?: FileKind) {
 export async function uploadPatientFile(params: {
   file: File
   patientId: string
+  patientName: string
   kind: FileKind
   label?: string
   treatmentId?: string
@@ -32,6 +33,7 @@ export async function uploadPatientFile(params: {
   const form = new FormData()
   form.append('file', params.file)
   form.append('patientId', params.patientId)
+  form.append('patientName', params.patientName)
   form.append('kind', params.kind)
   form.append('label', params.label?.trim() || params.file.name)
   if (params.treatmentId) form.append('treatmentId', params.treatmentId)

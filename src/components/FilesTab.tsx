@@ -4,10 +4,12 @@ import { listPatientFiles, uploadPatientFile } from '../api/files'
 
 export function FilesTab({
   patientId,
+  patientName,
   kind,
   onChanged,
 }: {
   patientId: string
+  patientName: string
   kind: FileKind
   onChanged?: () => void
 }) {
@@ -38,7 +40,7 @@ export function FilesTab({
     setUploading(true)
     setError(null)
     try {
-      await uploadPatientFile({ file, patientId, kind })
+      await uploadPatientFile({ file, patientId, patientName, kind })
       await reload()
       onChanged?.()
     } catch (err) {

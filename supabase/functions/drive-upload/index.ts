@@ -51,6 +51,46 @@ function getDriveClient() {
   return google.drive({ version: 'v3', auth })
 }
 
+/**
+ * Cada paciente ganha a própria subpasta dentro de GOOGLE_DRIVE_FOLDER_ID,
+ * assim os arquivos ficam fisicamente isolados por paciente no Drive (não
+ * só filtrados na tela) — se alguém abrir o Drive direto, paciente X e
+ * paciente Y aparecem em pastas separadas.
+ *
+ * A busca usa `appProperties.patientId` (não o nome da pasta) pra achar a
+ * pasta de novo com segurança, mesmo que alguém renomeie a pasta manualmente
+ * no Drive depois.
+ *
+ * Nota: se dois uploads pro MESMO paciente novo acontecerem ao mesmo tempo
+ * (milissegundos de diferença), é possível criar duas pastas por uma corrida
+ * de condição — cenário raro numa clínica pequena, mas documentado aqui.
+ */
+async function getOrCreatePatientFolder(
+  drive: ReturnType<typeof getDriveClient>,
+  patientId: string,
+  patientName: string
+) {
+  const search = await drive.files.list({
+    q: `'${GOOGLE_DRIVE_FOLDER_ID}' in parents and mimeType = 'application/vnd.google-apps.folder' and appProperties has { key='patientId' and value='${patientId}' } and trashed = false`,
+    fields: 'files(id, name)',
+    spaces: 'drive',
+  })
+  const existing = search.data.files?.[0]
+  if (existing?.id) return existing.id
+
+  const created = await drive.files.create({
+    requestBody: {
+      name: patientName.trim() || patientId,
+      mimeType: 'application/vnd.google-apps.folder',
+      parents: [GOOGLE_DRIVE_FOLDER_ID],
+      appProperties: { patientId },
+    },
+    fields: 'id',
+  })
+  if (!created.data.id) throw new Error('Não foi possível criar a pasta do paciente no Drive.')
+  return created.data.id
+}
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders })
   if (req.method !== 'POST') return json({ error: 'Método não permitido.' }, 405)
@@ -71,6 +111,7 @@ Deno.serve(async (req) => {
     const form = await req.formData()
     const file = form.get('file') as File | null
     const patientId = form.get('patientId') as string | null
+    const patientName = (form.get('patientName') as string | null) || patientId || 'Paciente'
     const kind = (form.get('kind') as string | null) ?? 'document'
     const label = (form.get('label') as string | null) ?? file?.name ?? 'Arquivo'
     const treatmentId = (form.get('treatmentId') as string | null) || null
@@ -82,14 +123,16 @@ Deno.serve(async (req) => {
       return json({ error: "kind deve ser 'image' ou 'document'." }, 400)
     }
 
-    // 3) Envia pro Google Drive com a conta de serviço da clínica
+    // 3) Envia pro Google Drive com a conta de serviço da clínica,
+    //    dentro da subpasta exclusiva deste paciente
     const buffer = new Uint8Array(await file.arrayBuffer())
     const drive = getDriveClient()
+    const patientFolderId = await getOrCreatePatientFolder(drive, patientId, patientName)
 
     const uploadRes = await drive.files.create({
       requestBody: {
-        name: `${patientId}_${Date.now()}_${file.name}`,
-        parents: [GOOGLE_DRIVE_FOLDER_ID],
+        name: `${Date.now()}_${file.name}`,
+        parents: [patientFolderId],
       },
       media: {
         mimeType: file.type || 'application/octet-stream',
