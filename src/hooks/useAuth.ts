@@ -22,9 +22,15 @@ export function useAuth() {
     if (error) throw error
   }
 
+  async function signUp(email: string, password: string) {
+    const { data, error } = await supabase.auth.signUp({ email, password })
+    if (error) throw error
+    return data
+  }
+
   async function signOut() {
     await supabase.auth.signOut()
   }
 
-  return { session, loading, signIn, signOut }
+  return { session, loading, signIn, signUp, signOut }
 }

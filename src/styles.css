@@ -58,6 +58,10 @@
   .login-brand{ color:var(--accent); font-family:var(--font-serif); font-size:38px; line-height:1; font-weight:700; letter-spacing:-.02em; text-align:center; }
   .login-brand span{ color:var(--amber); }
   .login-kicker{ color:var(--ink-soft); font-size:11px; letter-spacing:.08em; text-align:center; text-transform:uppercase; margin:8px 0 26px; }
+  .login-switch{ display:flex; gap:4px; padding:4px; margin-bottom:22px; background:var(--surface-2); border:1px solid var(--border); border-radius:10px; }
+  .login-switch button{ flex:1; padding:8px 6px; border-radius:7px; color:var(--ink-soft); font-size:11px; font-weight:600; }
+  .login-switch button.active{ color:var(--accent); background:var(--surface); box-shadow:0 1px 3px rgba(28,27,26,.08); }
+  .login-success{ color:var(--accent); background:var(--accent-soft); border-radius:8px; padding:9px 10px; font-size:12px; line-height:1.4; margin-bottom:10px; }
   .login-card .modal-title{ text-align:left; }
   .login-card .modal-actions{ margin-top:18px; }
   .login-card .btn-solid{ width:100%; justify-content:center; min-height:42px; }
